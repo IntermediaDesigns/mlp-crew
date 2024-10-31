@@ -79,6 +79,13 @@ export default function Dashboard() {
           );
         })}
       </div>
+      <div>
+      <img
+                    src="./mlp2.jpg"
+                    alt="group"
+                    className="min-w-[70%] h-auto object-cover rounded-2xl mx-auto"
+                  />
+      </div>
     </div>
   );
 }
