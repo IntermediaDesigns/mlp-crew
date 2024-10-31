@@ -1,35 +1,65 @@
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
-import { Filter } from 'lucide-react';
-import { api } from '../../services/api';
-import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card';
-import { Button } from '../../components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
-import { Input } from '../../components/ui/input';
-import { Pagination } from '../../components/shared/Pagination';
-import { LoadingSpinner } from '../../components/shared/LoadingSpinner';
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import { Filter } from "lucide-react";
+import { api } from "../../services/api";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "../../components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../components/ui/select";
+import { Input } from "../../components/ui/input";
+import { Pagination } from "../../components/shared/Pagination";
+import { LoadingSpinner } from "../../components/shared/LoadingSpinner";
 
-const KINDS = ['Alicorn', 'Unicorn', 'Pegasus', 'Earth', 'Human', 'Dragon', 'Other'];
+const KINDS = [
+  "Alicorn",
+  "Unicorn",
+  "Pegasus",
+  "Earth",
+  "Human",
+  "Dragon",
+  "Other",
+];
 
 export default function Characters() {
   const [pageSize, setPageSize] = useState(25);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
-    kind: '',
-    residence: '',
-    occupation: ''
+    kind: "",
+    residence: "",
+    occupation: "",
   });
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['characters', currentPage, pageSize, filters],
-    queryFn: () => api.getCharacters(pageSize, (currentPage - 1) * pageSize)
+    queryKey: ["characters", currentPage, pageSize, filters],
+    queryFn: () => api.getCharacters(pageSize, (currentPage - 1) * pageSize),
   });
 
-  const filteredData = data?.data?.filter(character => {
+  const filteredData = data?.data?.filter((character) => {
     if (filters.kind && !character.kind?.includes(filters.kind)) return false;
-    if (filters.residence && !character.residence?.toLowerCase().includes(filters.residence.toLowerCase())) return false;
-    if (filters.occupation && !character.occupation?.toLowerCase().includes(filters.occupation.toLowerCase())) return false;
+    if (
+      filters.residence &&
+      !character.residence
+        ?.toLowerCase()
+        .includes(filters.residence.toLowerCase())
+    )
+      return false;
+    if (
+      filters.occupation &&
+      !character.occupation
+        ?.toLowerCase()
+        .includes(filters.occupation.toLowerCase())
+    )
+      return false;
     return true;
   });
 
@@ -37,7 +67,7 @@ export default function Characters() {
   const totalPages = Math.ceil(totalItems / pageSize);
 
   const handleFilterChange = (key, value) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
     setCurrentPage(1);
   };
 
@@ -74,15 +104,19 @@ export default function Characters() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Select
               value={filters.kind || "all"}
-              onValueChange={(value) => handleFilterChange('kind', value === "all" ? "" : value)}
+              onValueChange={(value) =>
+                handleFilterChange("kind", value === "all" ? "" : value)
+              }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Filter by kind" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All kinds</SelectItem>
-                {KINDS.map(kind => (
-                  <SelectItem key={kind} value={kind}>{kind}</SelectItem>
+                {KINDS.map((kind) => (
+                  <SelectItem key={kind} value={kind}>
+                    {kind}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -90,13 +124,13 @@ export default function Characters() {
             <Input
               placeholder="Filter by residence"
               value={filters.residence}
-              onChange={(e) => handleFilterChange('residence', e.target.value)}
+              onChange={(e) => handleFilterChange("residence", e.target.value)}
             />
 
             <Input
               placeholder="Filter by occupation"
               value={filters.occupation}
-              onChange={(e) => handleFilterChange('occupation', e.target.value)}
+              onChange={(e) => handleFilterChange("occupation", e.target.value)}
             />
           </div>
         </div>
@@ -125,8 +159,8 @@ export default function Characters() {
                     </div>
                   )}
                   {character.image?.[0] && (
-                    <img 
-                      src={character.image[0]} 
+                    <img
+                      src={character.image[0]}
                       alt={character.name}
                       className="w-full h-96 object-cover object-top rounded-md"
                     />

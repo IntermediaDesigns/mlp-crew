@@ -3,7 +3,7 @@ import { supabase } from "./supabase";
 
 export const api = {
   // MLP API functions
-  async getCharacters(limit = 50, offset = 0) {
+  async getCharacters(limit = 555, offset = 0) {
     const response = await fetch(
       `${BASE_URL}/character/all?limit=${limit}&offset=${offset}`,
       {
@@ -26,7 +26,7 @@ export const api = {
     return response.json();
   },
 
-  async getEpisodes(limit = 50, offset = 0) {
+  async getEpisodes(limit = 250, offset = 0) {
     const response = await fetch(
       `${BASE_URL}/episode/all?limit=${limit}&offset=${offset}`,
       {
@@ -49,7 +49,7 @@ export const api = {
     return response.json();
   },
 
-  async getSongs(limit = 50, offset = 0) {
+  async getSongs(limit = 200, offset = 0) {
     const response = await fetch(
       `${BASE_URL}/song/all?limit=${limit}&offset=${offset}`,
       {
