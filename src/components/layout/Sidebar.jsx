@@ -8,7 +8,7 @@ const links = [
   { name: 'Characters', href: '/characters', icon: Users },
   { name: 'Episodes', href: '/episodes', icon: Tv },
   { name: 'Songs', href: '/songs', icon: Music },
-  { name: 'My Ponies', href: '/ponies', icon: Star },
+  { name: 'My Pony Crew', href: '/ponies', icon: Star },
   { name: 'Search', href: '/search', icon: Search },
 ];
 

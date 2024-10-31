@@ -15,7 +15,7 @@ export function Header({ setIsSidebarOpen }) {
           <span className="sr-only">Open sidebar</span>
         </Button>
         <div className="flex-1">
-          <h1 className="text-lg font-semibold">MLP Crew Builder</h1>
+          <h1 className="text-lg font-semibold">MLP Crew</h1>
         </div>
         <ThemeToggle />
       </div>

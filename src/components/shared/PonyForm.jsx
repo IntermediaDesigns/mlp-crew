@@ -7,11 +7,36 @@ import { Input } from '../ui/input';
 import { api } from '../../services/api';
 import { LoadingSpinner } from './LoadingSpinner';
 import { Card } from '../ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 const PONY_ATTRIBUTES = {
   kind: ['Earth Pony', 'Unicorn', 'Pegasus', 'Alicorn'],
   personality: ['Friendly', 'Brave', 'Clever', 'Energetic', 'Shy', 'Creative'],
   skills: ['Magic', 'Flying', 'Athletics', 'Art', 'Music', 'Leadership']
+};
+
+const CATEGORIES = {
+  'D&D Class': {
+    options: ['Warrior', 'Mage', 'Rogue', 'Cleric', 'Bard', 'Ranger'],
+    requiredSkills: {
+      'Warrior': ['Athletics'],
+      'Mage': ['Magic'],
+      'Rogue': ['Athletics'],
+      'Cleric': ['Magic'],
+      'Bard': ['Music'],
+      'Ranger': ['Athletics', 'Magic']
+    }
+  },
+  'Team Role': {
+    options: ['Project Manager', 'Product Owner', 'Developer', 'Designer', 'QA Engineer'],
+    requiredSkills: {
+      'Project Manager': ['Leadership'],
+      'Product Owner': ['Leadership'],
+      'Developer': ['Magic'],
+      'Designer': ['Art'],
+      'QA Engineer': ['Athletics']
+    }
+  }
 };
 
 export default function PonyForm({ initialData = null, onSubmit }) {
@@ -22,7 +47,9 @@ export default function PonyForm({ initialData = null, onSubmit }) {
     personality: [],
     skills: [],
     description: '',
-    image: ''
+    image: '',
+    category: '',
+    role: ''
   });
 
   // Fetch available ponies based on selected kind
@@ -34,6 +61,18 @@ export default function PonyForm({ initialData = null, onSubmit }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate required skills based on category and role
+    if (formData.category && formData.role) {
+      const requiredSkills = CATEGORIES[formData.category].requiredSkills[formData.role];
+      const hasRequiredSkills = requiredSkills.every(skill => formData.skills.includes(skill));
+      
+      if (!hasRequiredSkills) {
+        alert(`This role requires the following skills: ${requiredSkills.join(', ')}`);
+        return;
+      }
+    }
+
     try {
       await onSubmit(formData);
       navigate('/ponies');
@@ -53,6 +92,7 @@ export default function PonyForm({ initialData = null, onSubmit }) {
         : [...array, value];
       return { ...prev, [category]: newArray };
     });
+    console.log('formData:', formData);
   };
 
   const handlePonySelect = (image) => {
@@ -74,6 +114,48 @@ export default function PonyForm({ initialData = null, onSubmit }) {
           placeholder="Enter pony name"
           className="w-full"
         />
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium mb-2">Category</label>
+          <Select
+            value={formData.category}
+            onValueChange={(value) => setFormData(prev => ({ ...prev, category: value, role: '' }))}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select category" />
+            </SelectTrigger>
+            <SelectContent>
+              {Object.keys(CATEGORIES).map(category => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {formData.category && (
+          <div>
+            <label className="block text-sm font-medium mb-2">Role</label>
+            <Select
+              value={formData.role}
+              onValueChange={(value) => setFormData(prev => ({ ...prev, role: value }))}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select role" />
+              </SelectTrigger>
+              <SelectContent>
+                {CATEGORIES[formData.category].options.map(role => (
+                  <SelectItem key={role} value={role}>
+                    {role}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
       </div>
 
       <div>
@@ -99,7 +181,7 @@ export default function PonyForm({ initialData = null, onSubmit }) {
           {isLoading ? (
             <LoadingSpinner />
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-h-[300px] overflow-y-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-h-[300px] p-2 overflow-y-auto">
               {ponies?.data?.filter(pony => 
                 pony.kind?.includes(formData.kind) && pony.image?.[0]
               ).map((pony, index) => (
@@ -113,7 +195,7 @@ export default function PonyForm({ initialData = null, onSubmit }) {
                   <img
                     src={pony.image[0]}
                     alt="Pony"
-                    className="w-auto h-full object-cover rounded-md"
+                    className="w-full h-[160px] object-cover rounded-md"
                   />
                 </Card>
               ))}
@@ -152,6 +234,11 @@ export default function PonyForm({ initialData = null, onSubmit }) {
             </Button>
           ))}
         </div>
+        {formData.category && formData.role && (
+          <p className="text-sm text-muted-foreground mt-2">
+            Required skills for {formData.role}: {CATEGORIES[formData.category].requiredSkills[formData.role].join(', ')}
+          </p>
+        )}
       </div>
 
       <div>
@@ -183,7 +270,9 @@ PonyForm.propTypes = {
     personality: PropTypes.arrayOf(PropTypes.string),
     skills: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.string,
-    image: PropTypes.string
+    image: PropTypes.string,
+    category: PropTypes.string,
+    role: PropTypes.string
   }),
   onSubmit: PropTypes.func.isRequired
 };
