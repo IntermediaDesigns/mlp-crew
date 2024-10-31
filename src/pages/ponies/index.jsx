@@ -101,7 +101,7 @@ export default function PoniesPage() {
     <div className="container py-8 space-y-8">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold tracking-tight">My Ponies</h1>
-        <Button onClick={() => navigate('/ponies/new')}>
+        <Button onClick={() => navigate('/ponies/new')} className="hover:transition hover:transform hover:scale-110">
           <Plus className="h-4 w-4 mr-2" />
           New Pony
         </Button>
@@ -139,7 +139,7 @@ export default function PoniesPage() {
       </Card>
 
       <div className="flex justify-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-20 max-w-6xl">
           {ponies?.map((pony) => (
             <Card 
               key={pony.id} 
@@ -154,11 +154,11 @@ export default function PoniesPage() {
                     alt={pony.name}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-0 right-0 p-2 flex gap-1">
+                  <div className="absolute top-0 right-0 p-2 flex gap-3">
                     <Button
                       variant="secondary"
                       size="icon"
-                      className="bg-background/80 backdrop-blur-sm hover:bg-background/90"
+                      className="bg-background/80 backdrop-blur-sm hover:bg-background/90 hover:transition hover:transform hover:scale-110"
                       onClick={(e) => {
                         e.preventDefault();
                         navigate(`/ponies/${pony.id}/edit`);
@@ -169,7 +169,7 @@ export default function PoniesPage() {
                     <Button
                       variant="secondary"
                       size="icon"
-                      className="bg-background/80 backdrop-blur-sm hover:bg-background/90"
+                      className="bg-background/80 backdrop-blur-sm hover:bg-background/90 hover:transition hover:transform hover:scale-110"
                       onClick={(e) => {
                         e.preventDefault();
                         handleDelete(pony.id);
@@ -226,12 +226,12 @@ export default function PoniesPage() {
                 <div className="flex items-center justify-center">
                 <Button
                   variant="link"
-                    className="p-2 tracking-wider border hover:text-green-500 hover:border-green-500"
+                    className="p-2 tracking-wider border hover:text-green-500 hover:border-green-500 hover:transition hover:transform hover:scale-110 hover:ease-in-out hover:duration-300"
                   onClick={() => navigate(`/ponies/${pony.id}`)}
                 >
                   View Details
                 </Button>
-                </div>
+              </div>
               </div>
             </Card>
           ))}

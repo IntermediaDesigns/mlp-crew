@@ -128,7 +128,7 @@ export default function Characters() {
                     <img 
                       src={character.image[0]} 
                       alt={character.name}
-                      className="w-full h-48 object-cover rounded-md"
+                      className="w-full h-96 object-cover object-top rounded-md"
                     />
                   )}
                 </div>

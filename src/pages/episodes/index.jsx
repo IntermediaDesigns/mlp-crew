@@ -111,7 +111,7 @@ export default function Episodes() {
                     <img
                       src={episode.image}
                       alt={episode.name}
-                      className="w-full h-32 object-cover rounded-md mt-2"
+                      className="w-full h-96 object-cover rounded-md mt-2"
                     />
                   )}
                 </div>
