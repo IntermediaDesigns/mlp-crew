@@ -2,9 +2,9 @@
 
 Submitted by: **Lynjai Jimenez**
 
-This web app: **This application is a crew application using My Little Ponies with the mlp api. It displays all information about My Little Pony episodes, songs, and characters. The user can add, edit, and delete my little pony crewmates. The crewmates can be categorized and have attributes. The user can also search for crewmates. The application is mobile responsive.**
+This web app: **This application is a crew application using My Little Ponies with the mlp api (https://ponyapi.net/). It displays all information about My Little Pony episodes, songs, and characters. The user can add, edit, and delete my little pony crewmates. The crewmates can be categorized and have attributes. The user can also search for crewmates. The application is mobile responsive.**
 
-Time spent: **X** hours spent in total
+Time spent: **4** hours spent in total
 
 ## Required Features
 
