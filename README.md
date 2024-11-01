@@ -33,7 +33,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![MLP Crew](./mlp.gif)
+![MLP Crew](./public/mlp.gif)
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with Adobe Express
