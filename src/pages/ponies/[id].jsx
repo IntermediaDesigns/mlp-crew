@@ -1,18 +1,18 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { Pencil, ArrowLeft } from 'lucide-react';
-import { api } from '../../services/api';
-import { Button } from '../../components/ui/button';
-import { Card } from '../../components/ui/card';
-import { LoadingSpinner } from '../../components/shared/LoadingSpinner';
+import { useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Pencil, ArrowLeft } from "lucide-react";
+import { api } from "../../services/api";
+import { Button } from "../../components/ui/button";
+import { Card } from "../../components/ui/card";
+import { LoadingSpinner } from "../../components/shared/LoadingSpinner";
 
 export default function PonyDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   const { data: pony, isLoading } = useQuery({
-    queryKey: ['pony', id],
-    queryFn: () => api.getPonyById(id)
+    queryKey: ["pony", id],
+    queryFn: () => api.getPonyById(id),
   });
 
   if (isLoading) {
@@ -27,14 +27,14 @@ export default function PonyDetailPage() {
     <div className="container py-8 max-w-3xl">
       <div className="flex justify-between items-center mb-8">
         <div className="flex items-center gap-4">
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             size="icon"
-            onClick={() => navigate('/ponies')}
+            onClick={() => navigate("/ponies")}
+            className="text-xl"
           >
-            <ArrowLeft className="h-5 w-5" />
+            <ArrowLeft className="h-5 w-5 mr-2" /> Back
           </Button>
-          <h1 className="text-3xl font-bold tracking-tight">{pony.name}</h1>
         </div>
         <Button onClick={() => navigate(`/ponies/${id}/edit`)}>
           <Pencil className="h-4 w-4 mr-2" />
@@ -43,6 +43,9 @@ export default function PonyDetailPage() {
       </div>
 
       <Card className="p-6 space-y-6">
+        <h1 className="text-3xl font-bold tracking-wider flex justify-center">
+          {pony.name}
+        </h1>
         {pony.image && (
           <div className="mb-6">
             <img
