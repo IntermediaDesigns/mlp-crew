@@ -2,7 +2,7 @@
 
 Submitted by: **Lynjai Jimenez**
 
-This web app: **insert description**
+This web app: **This application is a crew application using My Little Ponies with the mlp api. It displays all information about My Little Pony episodes, songs, and characters. The user can add, edit, and delete my little pony crewmates. The crewmates can be categorized and have attributes. The user can also search for crewmates. The application is mobile responsive.**
 
 Time spent: **X** hours spent in total
 
@@ -19,22 +19,24 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] A crewmate can be given a category upon creation which restricts their attributes
-- [ ] The site displays summary statistics about a user's crew on their crew page 
-- [ ] The site displays a custom "success" metric about a user's crew which changes the look of the crewmate list
+- [ X ] A crewmate can be given a category upon creation which restricts their attributes
+- [ X ] The site displays summary statistics about a user's crew on their crew page
+- [ X ] The site displays a custom "success" metric about a user's crew which changes the look of the crewmate list
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you added to improve the site's functionality!
+* [ X ] List anything else that you added to improve the site's functionality!
+
+- Mobile Responsive
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![MLP Crew](./mlp.gif)
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
+GIF created with Adobe Express
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
@@ -43,6 +45,8 @@ GIF created with ...
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+- None
 
 ## License
 
