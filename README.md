@@ -35,6 +35,8 @@ Here's a walkthrough of implemented user stories:
 
 ![MLP Crew](./public/mlp.gif)
 
+Resubmission Youtube Video: [https://youtu.be/KaZrrRI6z4M]
+
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with Adobe Express
 <!-- Recommended tools:
